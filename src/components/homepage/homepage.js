@@ -1,15 +1,15 @@
-import React from 'react'
-import './homepage.css'
+import React from "react";
+import "./homepage.css";
 
-const Homepage = () => {
+const Homepage = ({setLoginUser}) => {
   return (
-    <div className='homepage'>
-        <h1>Home Page</h1>
-        <div className="button">
-            Logout
-        </div>
+    <div className="homepage">
+      <h1>Home Page</h1>
+      <div className="button" onClick={() => setLoginUser({})}>
+        Logout
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Homepage
+export default Homepage;

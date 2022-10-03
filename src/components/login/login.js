@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 const Axios = require("axios");
 
-const Login = () => {
+const Login = ({ setLoginUser }) => {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -17,13 +20,15 @@ const Login = () => {
   };
 
   const login = () => {
-    Axios.post("http://localhost:5000/login", user)
-    .then(res => alert(res.data.message));
+    Axios.post("http://localhost:5000/login", user).then((res) => {
+      alert(res.data.message);
+      setLoginUser(res.data.user);
+      navigate("/");
+    });
   };
 
   return (
     <div className="login">
-      {console.log(user)}
       <h1>Login</h1>
       <input
         type="text"
@@ -41,6 +46,10 @@ const Login = () => {
       />
       <div className="button" onClick={login}>
         Login
+      </div>
+      or
+      <div className="button" onClick={() => navigate("/register")}>
+        Register
       </div>
     </div>
   );
