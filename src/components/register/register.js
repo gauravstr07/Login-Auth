@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./register.css";
+const Axios = require('axios');
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -16,6 +17,20 @@ const Register = () => {
       [name]: value,
     });
   };
+
+  const register = () => {
+      const {name, email, password, reEnterPassword} = user
+      if(name && email && password (password === reEnterPassword)){
+        
+        Axios.post("http://localhost:5000/register", user)
+        .then((res) => {
+          console.log(res);
+        })
+      }else{
+        alert('Invalid Inputs');
+      }
+      
+  }
 
   return (
     <div className="register">
@@ -49,7 +64,7 @@ const Register = () => {
         placeholder=" Re-Enter your password"
         onChange={handleChange}
       />
-      <div className="button">Register</div>
+      <div className="button" onClick={register}>Register</div>
       or
       <div className="button">Login</div>
     </div>

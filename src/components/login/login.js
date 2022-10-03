@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
+const Axios = require("axios");
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -13,6 +14,11 @@ const Login = () => {
       ...user,
       [name]: value,
     });
+  };
+
+  const login = () => {
+    Axios.post("http://localhost:5000/login", user)
+    .then(res => alert(res.data.message));
   };
 
   return (
@@ -33,9 +39,9 @@ const Login = () => {
         placeholder="Enter your password"
         onChange={handleChange}
       />
-      <div className="button">Login</div>
-      or
-      <div className="button">Register</div>
+      <div className="button" onClick={login}>
+        Login
+      </div>
     </div>
   );
 };
